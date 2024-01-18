@@ -1,52 +1,64 @@
+using System.Collections;
 using UnityEngine;
 
-public class PlayerGenerator : MonoBehaviour
+namespace Game.Player
 {
-    [SerializeField] private Rect _rectAreaInstanciate;
-    [SerializeField] private PlayerPool _playerPool;
-    private int _playerCounter = 0;
-    
-    private void Start()
+    public class PlayerGenerator : MonoBehaviour
     {
-        _playerCounter = GetCounter();
-        InvokeRepeating(nameof(Instance),0, 0);
-    }
+        [SerializeField] private GameObject _playerPrefab;
+        [SerializeField] private Rect _rectAreaInstanciate;
+        private PlayerPool _playerPool;
+        private int _playerCounter = 0;
+        private Coroutine _coroutine;
 
-    private int GetCounter()
-    {
-        return 1;
-    }
-
-    private void Instance()
-    {
-        if (--_playerCounter == 0)
+        private void Start()
         {
-            // if (_playerPool.HasEnemy())
-            // {
-                // var enemy = _enemyPool.GetEnemy();
-                // enemy.GetComponent<FollowPlayer>().SetTarget(_target);
-                // enemy.GetComponent<Scoreable>().SetScore(_score);
-                // enemy.GetComponent<ObjectToEnemyPool>().SetEnemyPool(_enemyPool);
-                // SetEnemyPosition(enemy);
-            // }
-        }
-    }
-    
-    private void SetPlayerPosition(GameObject enemy)
-    {
-        var randomPosition = new Vector3(
-            Random.Range(_rectAreaInstanciate.x, _rectAreaInstanciate.x + _rectAreaInstanciate.width),
-            Random.Range(_rectAreaInstanciate.y, _rectAreaInstanciate.y + _rectAreaInstanciate.height),
-            0);
+            _playerCounter = GetCounter();
+            _playerPool = new PlayerPool(CreateInstance);
 
-        var enemyPosition = this.transform.position + randomPosition;
-        enemy.transform.position = enemyPosition;
-    }
-    
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        var position = _rectAreaInstanciate.position + (Vector2) transform.position + _rectAreaInstanciate.size/2;
-        Gizmos.DrawWireCube(position, _rectAreaInstanciate.size);
+            _coroutine = StartCoroutine(nameof(SpawnObjects));
+        }
+
+        private int GetCounter()
+        {
+            return 2;
+        }
+
+        private IEnumerator SpawnObjects()
+        {
+            for (int i = 0; i < _playerCounter; i++)
+            {
+                _playerPool.Pool.Get();
+                yield return null;
+            }
+        }
+
+        private GameObject CreateInstance()
+        {
+            Vector3 position = SetPlayerPosition();
+            GameObject go = Instantiate(_playerPrefab, position, Quaternion.identity);
+
+            return go;
+        }
+
+        private Vector3 SetPlayerPosition()
+        {
+            var randomPosition = new Vector3(
+                Random.Range(_rectAreaInstanciate.x, _rectAreaInstanciate.x + _rectAreaInstanciate.width),
+                Random.Range(_rectAreaInstanciate.y, _rectAreaInstanciate.y + _rectAreaInstanciate.height),
+                0);
+
+            Vector3 position = transform.position + randomPosition;
+            return position;
+        }
+
+#if UNITY_EDITOR
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.red;
+            var position = _rectAreaInstanciate.position + (Vector2)transform.position + _rectAreaInstanciate.size / 2;
+            Gizmos.DrawWireCube(position, _rectAreaInstanciate.size);
+        }
+#endif
     }
 }

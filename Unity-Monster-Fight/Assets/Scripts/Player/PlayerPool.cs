@@ -1,42 +1,46 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using Game.Generic;
 using UnityEngine;
 
-public class PlayerPool : ICustomObjectPool<Player>
+namespace Game.Player
 {
-    private int _startSize;
-    private ICustomPool<Player> _pool;
-
-    Transform _parent;
-    
-    public PlayerPool(Transform parent, int startSize)
+    public class PlayerPool : ICustomObjectPool<Player>
     {
-        _parent = parent;
-        _startSize = startSize;
-        _pool = new CustomPool<Player>(this);
-    }
-    
-    #region PoolSettings
-    public void TakeObject(Player objPool)
-    {
-        objPool.gameObject.SetActive(true);
-    }
+        private ICustomPool<Player> _pool;
+        public ICustomPool<Player> Pool => _pool;
 
-    public Player CreateObject()
-    {
-        GameObject gameObject = new GameObject(nameof(Player));
-        var newObject = gameObject.AddComponent<Player>();
+        private Func<GameObject> OnCreateInstance;
 
-        newObject.transform.SetParent(_parent);
-        newObject.gameObject.SetActive(false);
-        return newObject;
+        public PlayerPool(Func<GameObject> onCreateInstance)
+        {
+            OnCreateInstance = onCreateInstance;
+            _pool = new CustomPool<Player>(this);
+        }
+        
+        #region PoolSettings
+
+        public void TakeObject(Player objPool)
+        {
+            objPool.gameObject.SetActive(true);
+        }
+
+        public Player CreateObject()
+        {
+            GameObject go = OnCreateInstance?.Invoke();
+
+            if (go == null) return null;
+
+            var newObject = go.GetComponent<Player>();
+
+            newObject.gameObject.SetActive(false);
+            return newObject;
+        }
+
+        public void ReleaseObject(Player objToReturn)
+        {
+            objToReturn.gameObject.SetActive(false);
+        }
+
+        #endregion
     }
-
-    public void ReleaseObject(Player objToReturn)
-    {
-        objToReturn.gameObject.SetActive(false);
-    }
-
-    #endregion
 }
