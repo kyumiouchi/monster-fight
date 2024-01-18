@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 101f83cbe06c41f4f86b8bdc0aecbba2
+guid: 49db3aa5d7ceff34d82686a80dcfa995
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 50
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -136,43 +136,64 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Blue_button
+      name: floor_4
       rect:
         serializedVersion: 2
-        x: 324
-        y: 310
-        width: 128
-        height: 128
+        x: 480
+        y: 0
+        width: 480
+        height: 480
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 63, y: 62, z: 65, w: 66}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cbdb1563ca1d13b4585b2f6c2d354fac
-      internalID: 1066545075
+      spriteID: da3ba573752a18d48800ddaa38fbf620
+      internalID: 1981721397
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Green_button
+      name: floor_5
       rect:
         serializedVersion: 2
-        x: 324
-        y: 42
-        width: 128
-        height: 128
+        x: 960
+        y: 0
+        width: 480
+        height: 480
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 63, y: 62, z: 65, w: 66}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9677c89acec2cde478bd908029054712
-      internalID: -845097752
+      spriteID: 88a36174535647c438577fff93d1b565
+      internalID: -1362343221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: floor_6
+      rect:
+        serializedVersion: 2
+        x: 1440
+        y: 0
+        width: 480
+        height: 480
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7bc0591e7660d774d86ca22e26bec82c
+      internalID: -278662241
       vertices: []
       indices: 
       edges: []
@@ -188,8 +209,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Blue_button: 1066545075
-      Green_button: -845097752
+      floor2_0: 405909165
+      floor_4: 1981721397
+      floor_5: -1362343221
+      floor_6: -278662241
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
