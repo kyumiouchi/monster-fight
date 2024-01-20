@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BigInteger = System.Numerics.BigInteger;
 
-[CreateAssetMenu(menuName = "Data/Rounds Data", fileName = "Rounds_SO")]
+[CreateAssetMenu(menuName = "ScriptableObject/Data/Rounds Data", fileName = "Rounds_SO")]
 public class RoundsSo : ScriptableObject
 {
     [Header("Round Data")] 

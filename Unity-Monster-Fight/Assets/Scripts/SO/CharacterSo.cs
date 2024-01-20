@@ -1,7 +1,7 @@
 using Game.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Data/Character Data", fileName = "Character_SO")]
+[CreateAssetMenu(menuName = "ScriptableObject/Data/Character Data", fileName = "Character_SO")]
 public class CharacterSo : ScriptableObject
 {
     [Header("Character Data")] 
@@ -14,5 +14,4 @@ public class CharacterSo : ScriptableObject
         RunSpeed = Random.Range(_runSpeed.MinValue, _runSpeed.MaxValue);
         return RunSpeed;
     }
-    
 }

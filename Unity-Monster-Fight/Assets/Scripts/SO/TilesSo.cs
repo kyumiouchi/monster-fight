@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Data/Tiles Data", fileName = "Background_SO")]
+[CreateAssetMenu(menuName = "ScriptableObject/Data/Tiles Data", fileName = "Background_SO")]
 public class TilesSo : ScriptableObject
 {
     [Header("Tiles Data")] 
