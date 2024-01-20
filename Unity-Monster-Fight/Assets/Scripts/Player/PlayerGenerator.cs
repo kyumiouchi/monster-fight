@@ -1,5 +1,8 @@
-using System.Collections;
+using System.Numerics;
 using UnityEngine;
+using Random = UnityEngine.Random;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 namespace Game.Player
 {
@@ -7,38 +10,40 @@ namespace Game.Player
     {
         [SerializeField] private GameObject _playerPrefab;
         [SerializeField] private Rect _rectAreaInstanciate;
+        [SerializeField] private CharacterSo _characterSo;
+        
         private PlayerPool _playerPool;
-        private int _playerCounter = 0;
+        private BigInteger _playerCounter = 0;
         private Coroutine _coroutine;
 
         private void Start()
         {
-            _playerCounter = GetCounter();
-            _playerPool = new PlayerPool(CreateInstance);
-
-            _coroutine = StartCoroutine(nameof(SpawnObjects));
+            _playerPool = new PlayerPool(CreateInstance, UpdatePlayerInfo);
+        }
+        
+        public void PreparePlayers(BigInteger players)
+        {
+            _playerCounter = players;
         }
 
-        private int GetCounter()
+        private void Update()
         {
-            return 2;
-        }
-
-        private IEnumerator SpawnObjects()
-        {
-            for (int i = 0; i < _playerCounter; i++)
-            {
-                _playerPool.Pool.Get();
-                yield return null;
-            }
+            if (_playerCounter <= 0) return;
+            
+            _playerPool.Pool.Get();
+            _playerCounter--;
         }
 
         private GameObject CreateInstance()
         {
-            Vector3 position = SetPlayerPosition();
-            GameObject go = Instantiate(_playerPrefab, position, Quaternion.identity);
-
+            GameObject go = Instantiate(_playerPrefab, transform, true);
             return go;
+        }
+
+        private void UpdatePlayerInfo(Player player)
+        {
+            player.gameObject.transform.position = SetPlayerPosition();
+            player.SetRunSpeed(_characterSo.GetRandomRunSpeed());
         }
 
         private Vector3 SetPlayerPosition()

@@ -1,29 +1,32 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game.Player
 {
     public class PlayerMovement : MonoBehaviour
     {
-        [SerializeField] private CharacterSo _playerInfo;
         private Rigidbody2D _rigidbody2D;
-        private float _runSpeed;
+        private float _runSpeed = 0;
         private Vector2 _direction = Vector2.left;
+        private bool _canStartRun = false;
+
+        public void SetRunSpeed(float speed)
+        {
+            _runSpeed = speed;
+        }
+
+        public void StartRun()
+        {
+            _canStartRun = true;
+        }
 
         private void Awake()
         {
             _rigidbody2D = GetComponent<Rigidbody2D>();
         }
 
-        private void Start()
-        {
-            _runSpeed = _playerInfo.GetRandomRunSpeed();
-        }
-
         private void Update()
         {
+            if (!_canStartRun) return;
             _rigidbody2D.velocity = _direction * _runSpeed;
         }
     }

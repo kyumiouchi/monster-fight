@@ -1,6 +1,7 @@
 using System;
 using Game.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Game.Player
 {
@@ -10,10 +11,12 @@ namespace Game.Player
         public ICustomPool<Player> Pool => _pool;
 
         private Func<GameObject> OnCreateInstance;
+        private UnityAction<Player> OnUpdatePlayerInfo;
 
-        public PlayerPool(Func<GameObject> onCreateInstance)
+        public PlayerPool(Func<GameObject> onCreateInstance, UnityAction<Player> onUpdatePlayerInfo)
         {
             OnCreateInstance = onCreateInstance;
+            OnUpdatePlayerInfo = onUpdatePlayerInfo;
             _pool = new CustomPool<Player>(this);
         }
         
@@ -21,6 +24,7 @@ namespace Game.Player
 
         public void TakeObject(Player objPool)
         {
+            OnUpdatePlayerInfo?.Invoke(objPool);
             objPool.gameObject.SetActive(true);
         }
 

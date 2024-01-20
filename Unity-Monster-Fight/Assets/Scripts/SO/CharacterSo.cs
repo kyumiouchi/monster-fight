@@ -5,7 +5,7 @@ using UnityEngine;
 public class CharacterSo : ScriptableObject
 {
     [Header("Character Data")] 
-    [SerializeField] [MinMaxRange(0, 1)] protected RangedFloat _runSpeed = new RangedFloat(.7f, .8f);
+    [SerializeField] [MinMaxRange(5, 15)] protected RangedFloat _runSpeed = new RangedFloat(8f, 10f);
     
     public float RunSpeed { get; protected set; }
 
