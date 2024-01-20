@@ -10,21 +10,36 @@ namespace Game.Player
 
         private Func<Player> OnCreateInstance;
         private UnityAction<Player> OnUpdatePlayerInfo;
+        private UnityAction OnWillRelease;
+        private UnityAction OnReleased;
 
-        public PlayerPool(Func<Player> onCreateInstance, UnityAction<Player> onUpdatePlayerInfo)
+        public PlayerPool(Func<Player> onCreateInstance, UnityAction<Player> onUpdatePlayerInfo, UnityAction onReleased, UnityAction onWillRelease)
         {
             OnCreateInstance = onCreateInstance;
             OnUpdatePlayerInfo = onUpdatePlayerInfo;
+            OnWillRelease = onWillRelease;
+            OnReleased = onReleased;
             _pool = new CustomPool<Player>(this);
         }
-        public Player Get()
+        public void Get()
         {
-            return _pool.Get();
+            _pool.Get();
         }
 
         public void Release(Player objToReturn)
         {
             _pool.Return(objToReturn);
+            OnReleased?.Invoke();
+        }
+
+        public int Count()
+        {
+            return _pool.Count();
+        }
+
+        public void CanRelease()
+        {
+            OnWillRelease?.Invoke();
         }
         
         #region PoolSettings

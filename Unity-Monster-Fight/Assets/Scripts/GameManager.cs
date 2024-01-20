@@ -2,11 +2,9 @@ using System;
 using Game.Generic;
 using Game.Manager;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Game
 {
-
     public class GameManager : MonoBehaviourSingletonPersistence<GameManager>
     {
         [Serializable]
@@ -38,7 +36,7 @@ namespace Game
             Restart,
         }
 
-        [FormerlySerializedAs("prepareGameManager")] [FormerlySerializedAs("_prepareGame")] [SerializeField] private PrepareGameManager _prepareGameManager = null;
+        [SerializeField] private PrepareGameManager _prepareGameManager = null;
         /// <summary>
         /// MainMenu component on the main menu GameObject.
         /// </summary>
@@ -56,6 +54,7 @@ namespace Game
         {
             State = GameStates.PrepareGame;
             _prepareGameManager.OnStartRound += StartRound;
+            _roundManager.OnEndRound += OnRoundComplete;
         }
         
         private GameStates State
@@ -111,7 +110,7 @@ namespace Game
         /// </summary>
         private void OnRoundComplete()
         {
-            State = GameStates.EndRound;
+            State = GameStates.PrepareGame;
         }
     }
 }

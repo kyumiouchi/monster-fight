@@ -33,6 +33,11 @@ namespace Game.Generic
             _pool.Push(objToReturn);
         }
 
+        public int Count()
+        {
+            return _pool.Count;
+        }
+
         private void CreateInitialPool()
         {
             CreatePoolObject();
@@ -56,5 +61,7 @@ namespace Game.Generic
         T Get();
 
         void Return(T objToReturn);
+
+        int Count();
     }
 }

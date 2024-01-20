@@ -831,7 +831,6 @@ GameObject:
   - component: {fileID: 634010367}
   - component: {fileID: 634010366}
   - component: {fileID: 634010365}
-  - component: {fileID: 634010369}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -923,21 +922,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &634010369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 634010364}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9937663d7e5e99e48b0f3ff2ff37fb4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _prepareGameUi: {fileID: 184939869}
-  _roundUi: {fileID: 1543846207}
-  _roundsSo: {fileID: 11400000, guid: 2db336c30a786be4ea532635a6039012, type: 2}
 --- !u!1 &816806367
 GameObject:
   m_ObjectHideFlags: 0

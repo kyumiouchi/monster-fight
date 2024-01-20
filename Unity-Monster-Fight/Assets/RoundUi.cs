@@ -16,8 +16,7 @@ namespace Game.Ui
 
         private void Start()
         {
-            gameObject.SetActive(false);
-            Reset();
+            Clear();
         }
         
         private void Update()
@@ -27,20 +26,31 @@ namespace Game.Ui
             _textTimer.text = $"Timer {TimeSpan.FromSeconds(_currentTimer):ss\\.ff}";
         }
         
-        public void StartUi(RoundsSo roundsSo)
+        public void StartUi(int currentRound)
         {
-            _textRound.text = $"Round {roundsSo.CurrentRound}";
+            _textRound.text = $"Round {currentRound}";
             _textRound.enabled = true;
             _textTimer.enabled = true;
             gameObject.SetActive(true);
             _canStartTimer = true;
         }
         
-        private void Reset()
+        private void Clear()
         {
+            gameObject.SetActive(false);
             _textRound.enabled = false;
             _textTimer.enabled = false;
             _currentTimer = 0;
+        }
+
+        public void EndUi()
+        {
+            _canStartTimer = false;
+        }
+
+        public void EndRound()
+        {
+            Clear();
         }
     }
 }
