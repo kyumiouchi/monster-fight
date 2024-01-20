@@ -8,42 +8,43 @@ namespace Game.Player
 {
     public class PlayerGenerator : MonoBehaviour
     {
-        [SerializeField] private GameObject _playerPrefab;
+        [SerializeField] private Player _playerPrefab;
         [SerializeField] private Rect _rectAreaInstanciate;
         [SerializeField] private CharacterSo _characterSo;
         
         private PlayerPool _playerPool;
         private BigInteger _playerCounter = 0;
         private Coroutine _coroutine;
+        private float _destroyPlayerPosition;
 
         private void Start()
         {
             _playerPool = new PlayerPool(CreateInstance, UpdatePlayerInfo);
         }
         
-        public void PreparePlayers(BigInteger players)
+        public void PreparePlayers(BigInteger players, float destroyPlayerPosition)
         {
             _playerCounter = players;
+            _destroyPlayerPosition = destroyPlayerPosition;
         }
 
         private void Update()
         {
             if (_playerCounter <= 0) return;
             
-            _playerPool.Pool.Get();
+            _playerPool.Get();
             _playerCounter--;
         }
 
-        private GameObject CreateInstance()
+        private Player CreateInstance()
         {
-            GameObject go = Instantiate(_playerPrefab, transform, true);
+            Player go = Instantiate(_playerPrefab, transform, true);
             return go;
         }
 
         private void UpdatePlayerInfo(Player player)
         {
-            player.gameObject.transform.position = SetPlayerPosition();
-            player.SetRunSpeed(_characterSo.GetRandomRunSpeed());
+            player.Init(SetPlayerPosition(),_characterSo.GetRandomRunSpeed(), _playerPool, _destroyPlayerPosition);
         }
 
         private Vector3 SetPlayerPosition()

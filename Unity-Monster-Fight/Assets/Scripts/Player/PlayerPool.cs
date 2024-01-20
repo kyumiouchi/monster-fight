@@ -1,6 +1,5 @@
 using System;
 using Game.Generic;
-using UnityEngine;
 using UnityEngine.Events;
 
 namespace Game.Player
@@ -8,16 +7,24 @@ namespace Game.Player
     public class PlayerPool : ICustomObjectPool<Player>
     {
         private ICustomPool<Player> _pool;
-        public ICustomPool<Player> Pool => _pool;
 
-        private Func<GameObject> OnCreateInstance;
+        private Func<Player> OnCreateInstance;
         private UnityAction<Player> OnUpdatePlayerInfo;
 
-        public PlayerPool(Func<GameObject> onCreateInstance, UnityAction<Player> onUpdatePlayerInfo)
+        public PlayerPool(Func<Player> onCreateInstance, UnityAction<Player> onUpdatePlayerInfo)
         {
             OnCreateInstance = onCreateInstance;
             OnUpdatePlayerInfo = onUpdatePlayerInfo;
             _pool = new CustomPool<Player>(this);
+        }
+        public Player Get()
+        {
+            return _pool.Get();
+        }
+
+        public void Release(Player objToReturn)
+        {
+            _pool.Return(objToReturn);
         }
         
         #region PoolSettings
@@ -30,11 +37,9 @@ namespace Game.Player
 
         public Player CreateObject()
         {
-            GameObject go = OnCreateInstance?.Invoke();
+            var newObject = OnCreateInstance?.Invoke();
 
-            if (go == null) return null;
-
-            var newObject = go.GetComponent<Player>();
+            if (newObject == null) return null;
 
             newObject.gameObject.SetActive(false);
             return newObject;

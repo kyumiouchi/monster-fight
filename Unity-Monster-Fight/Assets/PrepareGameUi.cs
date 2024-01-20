@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game.Ui
 {
@@ -19,7 +20,7 @@ namespace Game.Ui
         private bool _canStartCounter = false;
         private bool _canStartMouseClick = false;
 
-        public Action uiComplete = delegate { };
+        public Action UiComplete = delegate { };
 
         private void Start()
         {
@@ -71,7 +72,7 @@ namespace Game.Ui
                 if (_currentCounter == _counterValues.Length)
                 {
                     Clear();
-                    uiComplete?.Invoke();
+                    UiComplete?.Invoke();
                     return;
                 }
                 _textCount.text = _counterValues[_currentCounter++];

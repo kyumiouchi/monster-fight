@@ -48,7 +48,7 @@ namespace Game
         /// <summary>
         /// The current state of the game.
         /// </summary>
-        [SerializeField] private GameStates state = GameStates.Init;
+        [SerializeField] private GameStates _state = GameStates.Init;
 
         public static event Action<GameStates> OnGameStateChanged;
         
@@ -61,7 +61,7 @@ namespace Game
         private GameStates State
         {
 
-            get => state;
+            get => _state;
 
             set
             {
@@ -71,10 +71,10 @@ namespace Game
                     throw new ArgumentException("Cannot return to init state.");
                 }
 
-                state = value;
+                _state = value;
                 
 
-                switch (state)
+                switch (_state)
                 {
                     case GameStates.PrepareGame:
                         _prepareGameManager.StartPrepareGame();
@@ -94,10 +94,10 @@ namespace Game
                     case GameStates.Init:
                     // Intentional fallthrough. Init isn't supported but will be explicitly handled above.
                     default:
-                        throw new ArgumentOutOfRangeException($"State machine doesn't support state {state}.");
+                        throw new ArgumentOutOfRangeException($"State machine doesn't support state {_state}.");
                 }
                 
-                OnGameStateChanged?.Invoke(state);
+                OnGameStateChanged?.Invoke(_state);
             }
         }
 

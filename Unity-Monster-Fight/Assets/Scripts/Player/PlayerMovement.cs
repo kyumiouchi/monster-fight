@@ -24,10 +24,10 @@ namespace Game.Player
             _rigidbody2D = GetComponent<Rigidbody2D>();
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (!_canStartRun) return;
-            _rigidbody2D.velocity = _direction * _runSpeed;
+            _rigidbody2D.velocity = _runSpeed * _direction;
         }
     }
 }

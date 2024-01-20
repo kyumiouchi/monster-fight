@@ -11,17 +11,17 @@ namespace Game.Manager
         
         [SerializeField] private RoundsSo _roundsSo;
 
-         public Action OnStartRound = delegate { };
+        public Action OnStartRound = delegate { };
         
         #region Callback
         private void OnEnable()
         {
-            _prepareGameUi.uiComplete += PrepareGameUiComplete;
+            _prepareGameUi.UiComplete += PrepareGameUiComplete;
         }
 
         private void OnDisable()
         {
-            _prepareGameUi.uiComplete -= PrepareGameUiComplete;
+            _prepareGameUi.UiComplete -= PrepareGameUiComplete;
         }
         #endregion
         

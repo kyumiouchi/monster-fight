@@ -15,14 +15,14 @@ namespace Game.Ui
         private void OnEnable()
         {
             GameManager.OnGameStateChanged += GameStateChanged;
-            _prepareGameUi.uiComplete += PrepareGameUiComplete;
+            _prepareGameUi.UiComplete += PrepareGameUiComplete;
             _roundUi.uiComplete += PrepareGameUiComplete;
         }
 
         private void OnDisable()
         {
             GameManager.OnGameStateChanged -= GameStateChanged;
-            _prepareGameUi.uiComplete -= PrepareGameUiComplete;
+            _prepareGameUi.UiComplete -= PrepareGameUiComplete;
             _roundUi.uiComplete -= PrepareGameUiComplete;
         }
 
