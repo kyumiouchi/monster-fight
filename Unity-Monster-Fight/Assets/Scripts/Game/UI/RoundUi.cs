@@ -3,7 +3,10 @@ using TMPro;
 using UnityEngine;
 
 namespace Game.Ui
-{
+{    
+    /// <summary>
+    /// RoundUi controls the Round Ui behavior.
+    /// </summary>
     public class RoundUi : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _textRound;

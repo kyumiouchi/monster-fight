@@ -1,7 +1,10 @@
 using UnityEngine;
 
 namespace Game.Manager
-{
+{    
+    /// <summary>
+    /// ScenarioManager controls the environment behavior.
+    /// </summary>
     public class ScenarioManager : MonoBehaviour
     {
         [SerializeField] private TilesSo _backgroundSo;

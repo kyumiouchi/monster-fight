@@ -1,7 +1,10 @@
 using UnityEngine;
 
 namespace Game.Player
-{
+{    
+    /// <summary>
+    /// PlayerGenerator has responsibility to control of the movement of the player.
+    /// </summary>
     public class PlayerMovement : MonoBehaviour
     {
         private Rigidbody2D _rigidbody2D;

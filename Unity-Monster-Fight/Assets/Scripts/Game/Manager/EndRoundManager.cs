@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace Game.Manager
 {
+    /// <summary>
+    /// EndRoundManager controls the end round screen and behaviour.
+    /// </summary>
     public class EndRoundManager : MonoBehaviour
     {
         [SerializeField] private EndRoundUi _endRoundUi;

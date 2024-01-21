@@ -3,7 +3,10 @@ using Game.Ui;
 using UnityEngine;
 
 namespace Game.Manager
-{
+{    
+    /// <summary>
+    /// PrepareRoundManager controls the ready round to start the round.
+    /// </summary>
     public class PrepareRoundManager : MonoBehaviour
     {
         [SerializeField] private PrepareRoundUi prepareRoundUi;

@@ -2,6 +2,9 @@ using System;
 
 namespace Game.Manager
 {
+    /// <summary>
+    /// GameStates has all game and round states.
+    /// </summary>
     [Serializable]
     public enum GameStates
     {

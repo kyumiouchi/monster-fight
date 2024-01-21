@@ -1,4 +1,3 @@
-using System;
 using Game.Utils;
 using TMPro;
 using UnityEngine;
@@ -7,6 +6,9 @@ using UnityEngine.UI;
 
 namespace Game.Ui
 {
+    /// <summary>
+    /// InitializeRoundUi controls the Initialize Round Ui behavior.
+    /// </summary>
     public class InitializeRoundUi : MonoBehaviour
     {
         [SerializeField] private Slider _loadingSlider;

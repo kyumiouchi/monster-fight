@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Game.Manager
 {
+    /// <summary>
+    /// InitializeRoundManager controls the initial screen and behaviour of the round.
+    /// </summary>
     public class InitializeRoundManager : MonoBehaviour
     {
         [SerializeField] private InitializeRoundUi _initializeRoundUi;

@@ -4,6 +4,9 @@ using UnityEngine.Events;
 
 namespace Game.Player
 {
+    /// <summary>
+    /// PlayerGenerator has responsibility to control of the players pool.
+    /// </summary>
     public class PlayerPool : ICustomObjectPool<Player>
     {
         private ICustomPool<Player> _pool;

@@ -3,7 +3,10 @@ using Game.Manager;
 using UnityEngine;
 
 namespace Game.Player
-{
+{    
+    /// <summary>
+    /// Player has all control of the player.
+    /// </summary>
     public class Player : MonoBehaviour
     {
         [SerializeField] private FloatReference _timerToDestroy;

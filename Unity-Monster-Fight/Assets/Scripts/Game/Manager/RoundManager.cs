@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace Game.Manager
 {
+    /// <summary>
+    /// RoundManager controls the start of the round until the end of the player behavior.
+    /// </summary>
     public class RoundManager : MonoBehaviour
     {
         [SerializeField] private RoundUi _roundUi;

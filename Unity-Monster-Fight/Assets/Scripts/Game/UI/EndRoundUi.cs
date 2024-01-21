@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 namespace Game.Ui
 {
+    /// <summary>
+    /// EndRoundUi controls the End Round Ui behavior.
+    /// </summary>
     public class EndRoundUi : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _textRound;

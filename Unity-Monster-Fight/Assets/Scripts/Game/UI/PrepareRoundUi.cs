@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Game.Ui
 {
+    /// <summary>
+    /// PrepareRoundUi controls the Prepare Round Ui behavior.
+    /// </summary>
     public class PrepareRoundUi : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _textInstruction;

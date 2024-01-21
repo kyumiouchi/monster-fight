@@ -7,7 +7,10 @@ using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
 namespace Game.Player
-{
+{    
+    /// <summary>
+    /// PlayerGenerator has responsibility to control of the spawned players.
+    /// </summary>
     public class PlayerGenerator : MonoBehaviour
     {
         [SerializeField] private Player _playerPrefab;

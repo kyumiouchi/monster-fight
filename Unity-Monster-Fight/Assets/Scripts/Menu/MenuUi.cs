@@ -4,6 +4,9 @@ using Game.Utils;
 
 namespace Game.Menu
 {
+    /// <summary>
+    /// MenuUi controls the Menu Ui behavior.
+    /// </summary>
     public class MenuUi : MonoBehaviour
     {
         [SerializeField] private Button _buttonStart;
