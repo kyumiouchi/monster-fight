@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace Game.Manager
 {
-    public class PrepareGameManager : MonoBehaviour
+    public class PrepareRoundManager : MonoBehaviour
     {
-        [SerializeField] private PrepareGameUi _prepareGameUi;
+        [SerializeField] private PrepareRoundUi prepareRoundUi;
         
         [SerializeField] private RoundsSo _roundsSo;
 
@@ -15,12 +15,12 @@ namespace Game.Manager
         #region Callback
         private void OnEnable()
         {
-            _prepareGameUi.UiComplete += PrepareGameUiComplete;
+            prepareRoundUi.UiComplete += PrepareGameUiComplete;
         }
 
         private void OnDisable()
         {
-            _prepareGameUi.UiComplete -= PrepareGameUiComplete;
+            prepareRoundUi.UiComplete -= PrepareGameUiComplete;
         }
         #endregion
         
@@ -31,7 +31,7 @@ namespace Game.Manager
 
         public void StartPrepareRound()
         {
-            _prepareGameUi.StartUi(_roundsSo);
+            prepareRoundUi.StartUi(_roundsSo);
         }
     }
 }

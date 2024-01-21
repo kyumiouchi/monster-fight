@@ -323,7 +323,7 @@ GameObject:
   - component: {fileID: 184939867}
   - component: {fileID: 184939869}
   m_Layer: 5
-  m_Name: PrepareUi
+  m_Name: PrepareRoundUi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -845,7 +845,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e7e0f2a3fcf3c94faec61beb5561a8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prepareGameUi: {fileID: 184939869}
+  prepareRoundUi: {fileID: 184939869}
   _roundsSo: {fileID: 11400000, guid: 2db336c30a786be4ea532635a6039012, type: 2}
 --- !u!114 &547018370
 MonoBehaviour:
@@ -875,10 +875,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac7d380b06f9b2a4a93b3336148149be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prepareGameManager: {fileID: 547018369}
+  _initializeRoundManager: {fileID: 547018373}
+  _prepareRoundManager: {fileID: 547018369}
   _roundManager: {fileID: 547018370}
   _endRoundManager: {fileID: 547018372}
-  _initializeRoundManager: {fileID: 547018373}
   _state: 0
 --- !u!114 &547018372
 MonoBehaviour:

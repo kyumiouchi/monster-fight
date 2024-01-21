@@ -1,26 +1,19 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game.Manager
 {
+    /// <summary>
+    /// GameManager controls the rounds of the game.
+    /// </summary>
     public class GameManager : MonoBehaviour
-    {
-        private static GameManager _instance;
-
-        private void Awake()
-        {
-            _instance = this;
-        }
-        
-        [SerializeField] private PrepareGameManager _prepareGameManager = null;
-        /// <summary>
-        /// MainMenu component on the main menu GameObject.
-        /// </summary>
+    {        
+        [SerializeField] private InitializeRoundManager _initializeRoundManager = null;
+        [SerializeField] private PrepareRoundManager _prepareRoundManager = null;
         [SerializeField] private RoundManager _roundManager = null;
         [SerializeField] private EndRoundManager _endRoundManager = null;
-        [SerializeField] private InitializeRoundManager _initializeRoundManager = null;
-
-
+        
         /// <summary>
         /// The current state of the game.
         /// </summary>
@@ -32,7 +25,7 @@ namespace Game.Manager
         {
             State = GameStates.InitializeRound;
             _initializeRoundManager.OnChargedRound += OnChargedRound;
-            _prepareGameManager.OnStartRound += OnStartRound;
+            _prepareRoundManager.OnStartRound += OnStartRound;
             _roundManager.OnEndRound += OnRoundComplete;
             _endRoundManager.OnNextRound += OnNextRound;
         }
@@ -58,7 +51,7 @@ namespace Game.Manager
                         break;
                     
                     case GameStates.PrepareRound:
-                        _prepareGameManager.StartPrepareRound();
+                        _prepareRoundManager.StartPrepareRound();
                         break;
 
                     case GameStates.StartRound:

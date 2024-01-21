@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game.Ui
 {
-    public class PrepareGameUi : MonoBehaviour
+    public class PrepareRoundUi : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _textInstruction;
         [SerializeField] private TextMeshProUGUI _textCount;

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 17a56ce24f054424da18f9e5f45555b3, type: 3}
-  m_Name: Rounds_SO
+  m_Name: Rounds_Main_SO
   m_EditorClassIdentifier: 
   _currentRound: 9
   _lastRoundData:
