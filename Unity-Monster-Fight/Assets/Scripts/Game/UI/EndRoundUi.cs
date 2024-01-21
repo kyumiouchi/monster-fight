@@ -2,22 +2,23 @@ using System;
 using Game.Utils;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class EndRoundUi : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _textRound;
     [SerializeField] private TextMeshProUGUI _textInfoRound;
-    [SerializeField] private Button _btnNextRound;
-    [SerializeField] private Button _btnExit;
+    [SerializeField] private Button _buttonNextRound;
+    [SerializeField] private Button _buttonExit;
 
     public Action OnNextRound = delegate { };
     public Action OnExitGame = delegate { };
     private void Start()
     {
         gameObject.SetActive(false);
-        _btnNextRound.onClick.AddListener(NextRound);
-        _btnExit.onClick.AddListener(ExitGame);
+        _buttonNextRound.onClick.AddListener(NextRound);
+        _buttonExit.onClick.AddListener(ExitGame);
     }
 
     public void StartEndRound(int round, int totalPlayers, float timer)

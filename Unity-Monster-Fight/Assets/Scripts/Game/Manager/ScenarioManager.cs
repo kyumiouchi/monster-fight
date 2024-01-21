@@ -1,7 +1,6 @@
-using Game.Manager;
 using UnityEngine;
 
-namespace Game.Scenario
+namespace Game.Manager
 {
     public class ScenarioManager : MonoBehaviour
     {

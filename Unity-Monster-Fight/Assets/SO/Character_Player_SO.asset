@@ -14,5 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _runSpeed:
     MinValue: 8.002978
-    MaxValue: 10.144358
-  _sprite: {fileID: 21300000, guid: 108837cf9460bf44f9edc61b00aea325, type: 3}
+    MaxValue: 13.16273

@@ -1,9 +1,7 @@
 using System;
-using Game.Generic;
-using Game.Manager;
 using UnityEngine;
 
-namespace Game
+namespace Game.Manager
 {
     public class GameManager : MonoBehaviour
     {

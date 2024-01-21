@@ -1,7 +1,6 @@
 using System;
 using Game.Ui;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Game.Manager
 {

@@ -7,22 +7,26 @@ namespace Game.Menu
     public class MenuUi : MonoBehaviour
     {
         [SerializeField] private Button _buttonStart;
+        [SerializeField] private Button _buttonExit;
 
-        #region Callback
-        private void OnEnable()
+        private void Start()
         {
             _buttonStart.onClick.AddListener(ClickStartButton);
+            _buttonExit.onClick.AddListener(ExitGame);
         }
-
-        private void OnDisable()
-        {
-            _buttonStart.onClick.RemoveListener(ClickStartButton);
-        }
-        #endregion
 
         private void ClickStartButton()
         {
             Loader.Load(Loader.Scene.SCN_Game);
+        }
+        
+        private void ExitGame()
+        {
+            #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+            #endif
+            
+            Application.Quit();
         }
     }
 }
