@@ -41,13 +41,11 @@ namespace Game.Manager
 
         public void PrepareRound()
         {
-            Debug.Log("Prepare Round " +_roundsSo.CurrentRound);
             _playerGenerator.PreparePlayers(_roundsSo.NumberPlayers, _leftEndWorldPosition);
         }
         public void StartRound()
         {
-            Debug.Log("Start Round " +_roundsSo.CurrentRound);
-            _roundUi.StartUi(_roundsSo.CurrentRound);
+            _roundUi.StartUi(_roundsSo.NumberPlayers,_roundsSo.CurrentRound);
         }
 
         private void EndRoundUi()
@@ -58,7 +56,6 @@ namespace Game.Manager
         private void EndRound()
         {
             _roundUi.EndRound();
-            Debug.Log("End Round " +_roundsSo.CurrentRound);
             _roundsSo.NextRound();
             OnEndRound?.Invoke();
         }

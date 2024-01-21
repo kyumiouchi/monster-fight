@@ -8,8 +8,8 @@ namespace Game.Ui
     {
         [SerializeField] private TextMeshProUGUI _textRound;
         [SerializeField] private TextMeshProUGUI _textTimer;
+        [SerializeField] private TextMeshProUGUI _textMonsters;
         
-        public Action uiComplete = delegate { };
         private float _currentTimer;
         
         private bool _canStartTimer = false;
@@ -26,8 +26,9 @@ namespace Game.Ui
             _textTimer.text = $"Timer {TimeSpan.FromSeconds(_currentTimer):ss\\.ff}";
         }
         
-        public void StartUi(int currentRound)
+        public void StartUi(int totalMosnters, int currentRound)
         {
+            _textMonsters.text = $"Total {totalMosnters}";
             _textRound.text = $"Round {currentRound}";
             _textRound.enabled = true;
             _textTimer.enabled = true;

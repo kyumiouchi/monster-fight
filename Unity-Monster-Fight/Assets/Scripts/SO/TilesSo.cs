@@ -5,11 +5,13 @@ public class TilesSo : ScriptableObject
 {
     [Header("Tiles Data")] 
     [SerializeField] private Sprite[] _sprites;
-    public Sprite Sprite { get; protected set; }
 
-    public Sprite GetRandomSprite()
+    public int Count => _sprites.Length;
+
+    public Sprite GetSpriteByPosition(int position)
     {
-        Sprite = _sprites[Random.Range(0, _sprites.Length)];
-        return Sprite;
+        return _sprites[position];
     }
+
+    public Sprite this[int position] => _sprites[position];
 }

@@ -88,5 +88,10 @@ namespace Game.Player
         {
             return _renderer.bounds.size.x / 2;
         }
+
+        public float GetPlayerHeight()
+        {
+            return _renderer.bounds.size.y / 2;
+        }
     }
 }

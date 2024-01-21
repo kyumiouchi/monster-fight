@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Numerics;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -22,12 +23,16 @@ namespace Game.Player
         private float _destroyPlayerPosition;
         private int _finishedPlayers = 0;
         private int _destroyedPlayers = 0;
+        private float _widthPlayer = 0;
+        private float _heightPlayer = 0;
         
         public Action OnAllPlayerEnded = delegate { };
         public Action OnOnePlayerEnded = delegate { };
 
         private void Start()
         {
+            _widthPlayer = _playerPrefab.GetPlayerWidth();
+            _heightPlayer = _playerPrefab.GetPlayerHeight();
             _playerPool = new PlayerPool(CreateInstance, UpdatePlayerInfo, Released, WillRelease);
         }
 
@@ -36,8 +41,15 @@ namespace Game.Player
             if (_lastTotalEnabledPlayers == 0)
                 _playerToPool = players;
             _totalEnabledPlayers = players;
-            float widthPlayer = _playerPrefab.GetPlayerWidth();
-            _destroyPlayerPosition = destroyPlayerPosition - widthPlayer;
+            _destroyPlayerPosition = destroyPlayerPosition - _widthPlayer;
+        }
+
+        private void Update()
+        {
+            if (_playerToPool <= 0) return;
+            
+            _playerPool.Get();
+            _playerToPool--;
         }
 
         private void WillRelease()
@@ -64,17 +76,7 @@ namespace Game.Player
                 _destroyedPlayers = 0;
                 _lastTotalEnabledPlayers = 0;
                 _playerToPool = _totalEnabledPlayers;
-                Debug.Log("_playerToPool " +_playerToPool);
             }
-        }
-
-        private void Update()
-        {
-            if (_playerToPool <= 0) return;
-            
-            Debug.Log("Instanciate " + _playerPool);
-            _playerPool.Get();
-            _playerToPool--;
         }
 
         private Player CreateInstance()
@@ -91,8 +93,8 @@ namespace Game.Player
         private Vector3 SetPlayerPosition()
         {
             var randomPosition = new Vector3(
-                Random.Range(_rectAreaInstanciate.x, _rectAreaInstanciate.x + _rectAreaInstanciate.width),
-                Random.Range(_rectAreaInstanciate.y, _rectAreaInstanciate.y + _rectAreaInstanciate.height),
+                Random.Range(_rectAreaInstanciate.x, _rectAreaInstanciate.x + _rectAreaInstanciate.width - _widthPlayer),
+                Random.Range(_rectAreaInstanciate.y + _heightPlayer, _rectAreaInstanciate.y + _rectAreaInstanciate.height - _heightPlayer),
                 0);
 
             Vector3 position = transform.position + randomPosition;
