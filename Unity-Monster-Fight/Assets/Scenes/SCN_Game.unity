@@ -811,6 +811,7 @@ GameObject:
   - component: {fileID: 547018369}
   - component: {fileID: 547018372}
   - component: {fileID: 547018373}
+  - component: {fileID: 547018374}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -908,6 +909,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _initializeRoundUi: {fileID: 1942025189}
   _roundsSo: {fileID: 11400000, guid: 2db336c30a786be4ea532635a6039012, type: 2}
+--- !u!114 &547018374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547018367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29af8a9a1b4db62419c24b58845ce51a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _settingsSo: {fileID: 11400000, guid: b1d22db2f7bf652408f418c5c969774e, type: 2}
 --- !u!1 &550672143
 GameObject:
   m_ObjectHideFlags: 0
@@ -2663,7 +2677,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6389304247352311121, guid: ce7d6a2d9c9b623428f3315d76dc47bc, type: 3}
       propertyPath: m_fontSize
-      value: 69.1
+      value: 69.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

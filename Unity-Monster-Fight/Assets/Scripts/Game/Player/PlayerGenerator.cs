@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Numerics;
+using Game.Manager;
+using MyNamespace;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using Vector2 = UnityEngine.Vector2;
@@ -29,7 +31,6 @@ namespace Game.Player
         private float _widthPlayer = 0;
         private float _heightPlayer = 0;
         
-        private Coroutine _coroutine;
         
         public Action OnAllPlayerReady = delegate { };
         public Action OnAllPlayerEnded = delegate { };
@@ -45,14 +46,24 @@ namespace Game.Player
         {
             _totalEnabledPlayers = _roundsSo.NumberPlayers;
             if (_lastTotalEnabledPlayers == 0)
-                _playerToPool = _totalEnabledPlayers;
+            {
+                StartSpawnPlayers();
+            }
+                
             _destroyPlayerPosition = destroyPlayerPosition - _widthPlayer;
         }
 
         private void Update()
         {
-            if (_playerToPool <= 0) return;
+            SpawnPlayers();
+        }
+
+        private void SpawnPlayers()
+        {
+            if (SettingsManager.Instance.SettingsSo.TypeInstanciate != Settings.NoLoop) return;
             
+            if (_playerToPool <= 0) return;
+
             _playerPool.Get();
             _playerToPool--;
         }
@@ -79,7 +90,7 @@ namespace Game.Player
             {
                 _destroyedPlayers = 0;
                 _lastTotalEnabledPlayers = 0;
-                _playerToPool = _totalEnabledPlayers;
+                StartSpawnPlayers();
             }
         }
 
@@ -123,5 +134,35 @@ namespace Game.Player
             Gizmos.DrawWireCube(position, _rectAreaInstanciate.size);
         }
 #endif
+
+        #region Settings
+
+        private Coroutine _coroutine;
+        private void StartSpawnPlayers()
+        {
+            _playerToPool = _totalEnabledPlayers;
+            
+            switch (SettingsManager.Instance.SettingsSo.TypeInstanciate)
+            {
+                case Settings.NoLoop:
+                    // Look Update()
+                    break;
+                case Settings.CoroutineAndLoop:
+                    _coroutine = StartCoroutine(SpawnPlayersCoroutine());
+                    break;
+            }
+        }
+
+        private IEnumerator SpawnPlayersCoroutine()
+        {
+            while (_playerToPool > 0)
+            {
+                _playerPool.Get();
+                _playerToPool--;
+                yield return null;
+            }
+        }
+
+        #endregion
     }
 }

@@ -472,7 +472,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2564110292193975729, guid: be56c6c6c3ab12c47b9dc300b4d16da8, type: 3}
       propertyPath: m_RaycastTarget
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2564110292193975729, guid: be56c6c6c3ab12c47b9dc300b4d16da8, type: 3}
       propertyPath: m_PreserveAspect
