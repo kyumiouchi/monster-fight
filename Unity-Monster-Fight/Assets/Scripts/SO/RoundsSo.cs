@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [CreateAssetMenu(menuName = "ScriptableObject/Data/Rounds Data", fileName = "Rounds_SO")]
 public class RoundsSo : ScriptableObject
@@ -8,26 +9,54 @@ public class RoundsSo : ScriptableObject
     
     [SerializeField] private int _currentRound = 1;
 
-    [SerializeField] private float _currentRoundTimer = 0;
+    [SerializeField] private RoundInfo _lastRoundData = new RoundInfo();
     public int CurrentRound => _currentRound;
-    public float CurrentRoundTimer => _currentRoundTimer;
 
     public int NumberPlayers => GetNumberOfPlayer(_currentRound);
-
-    public void RestartRound()
-    {
-        _currentRound = 1;
-        _currentRoundTimer = 0;
-    }
+    public RoundInfo LastRoundData => _lastRoundData;
     
     public void NextRound()
     {
+        ClearRoundData();
         _currentRound++;
     }
-    
-    public void SetCurrentRoundTimer(float timer)
+
+    public void SetLastRoundTimer(float timer)
     {
-        _currentRoundTimer = timer;
+        _lastRoundData.RoundTimer = timer;
+    }
+
+    public void SetLastLoadingTimer(float timer)
+    {
+        _lastRoundData.LoadingTimer = timer;
+    }
+
+    public void SetSpawnedPlayers(int currentPlayers)
+    {
+        _lastRoundData.SpawnedPlayers = currentPlayers;
+    }
+
+    public void AddSpawnedPlayerDelegate(UnityAction<int> action)
+    {
+        _lastRoundData.OnUpdateSpawnedPlayers += action;
+    }
+
+    public void RemoveSpawnedPlayerDelegate(UnityAction<int> action)
+    {
+        _lastRoundData.OnUpdateSpawnedPlayers -= action;
+    }
+    
+    public void RestartRound()
+    {
+        _currentRound = 1;
+        ClearRoundData();
+    }
+
+    private void ClearRoundData()
+    {
+        _lastRoundData.RoundTimer = 0;
+        _lastRoundData.LoadingTimer = 0;
+        _lastRoundData.SpawnedPlayers = 0;
     }
     
     #region Fibonacci
@@ -83,5 +112,4 @@ public class RoundsSo : ScriptableObject
         return result;
     }
     #endregion
-
 }

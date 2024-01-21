@@ -29,7 +29,7 @@ namespace Game.Manager
             OnStartRound?.Invoke();
         }
 
-        public void StartPrepareGame()
+        public void StartPrepareRound()
         {
             _prepareGameUi.StartUi(_roundsSo);
         }

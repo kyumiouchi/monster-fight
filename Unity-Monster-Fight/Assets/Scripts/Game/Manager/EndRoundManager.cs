@@ -29,7 +29,7 @@ namespace Game.Manager
 
         public void EndRound()
         {
-            _endRoundUi.StartEndRound(_roundsSo.CurrentRound, _roundsSo.NumberPlayers, _roundsSo.CurrentRoundTimer);
+            _endRoundUi.StartEndRound(_roundsSo.CurrentRound, _roundsSo.NumberPlayers, 0);
         }
 
         private void StartNextRound()

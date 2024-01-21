@@ -19,6 +19,7 @@ namespace Game.Manager
         /// </summary>
         [SerializeField] private RoundManager _roundManager = null;
         [SerializeField] private EndRoundManager _endRoundManager = null;
+        [SerializeField] private InitializeRoundManager _initializeRoundManager = null;
 
 
         /// <summary>
@@ -30,10 +31,11 @@ namespace Game.Manager
         
         private void Start()
         {
-            State = GameStates.PrepareGame;
-            _prepareGameManager.OnStartRound += StartRound;
+            State = GameStates.InitializeRound;
+            _initializeRoundManager.OnChargedRound += OnChargedRound;
+            _prepareGameManager.OnStartRound += OnStartRound;
             _roundManager.OnEndRound += OnRoundComplete;
-            _endRoundManager.OnNextRound += NextRound;
+            _endRoundManager.OnNextRound += OnNextRound;
         }
         
         private GameStates State
@@ -51,9 +53,13 @@ namespace Game.Manager
                 
                 switch (_state)
                 {
-                    case GameStates.PrepareGame:
-                        _prepareGameManager.StartPrepareGame();
-                        _roundManager.PrepareRound();
+                    case GameStates.InitializeRound:
+                        _initializeRoundManager.InitializeRound();
+                        _roundManager.InitializeRound();
+                        break;
+                    
+                    case GameStates.PrepareRound:
+                        _prepareGameManager.StartPrepareRound();
                         break;
 
                     case GameStates.StartRound:
@@ -75,9 +81,17 @@ namespace Game.Manager
         }
 
         /// <summary>
+        /// Triggered when the round is read to start.
+        /// </summary>
+        private void OnChargedRound()
+        {
+            State = GameStates.PrepareRound;
+        }
+
+        /// <summary>
         /// Triggered when the round start.
         /// </summary>
-        private void StartRound()
+        private void OnStartRound()
         {
             State = GameStates.StartRound;
         }
@@ -89,9 +103,13 @@ namespace Game.Manager
         {
             State = GameStates.EndRound;
         }
-        private void NextRound()
+        
+        /// <summary>
+        /// Triggered when the round ended.
+        /// </summary>
+        private void OnNextRound()
         {
-            State = GameStates.PrepareGame;
+            State = GameStates.InitializeRound;
         }
     }
 }

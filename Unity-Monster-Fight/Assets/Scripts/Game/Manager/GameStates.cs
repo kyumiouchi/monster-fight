@@ -11,9 +11,14 @@ namespace Game.Manager
         Init,
 
         /// <summary>
+        /// Initialize the round data
+        /// </summary>
+        InitializeRound,
+
+        /// <summary>
         /// Prepare the round before start
         /// </summary>
-        PrepareGame,
+        PrepareRound,
 
         /// <summary>
         /// Start Round
@@ -24,5 +29,6 @@ namespace Game.Manager
         /// Show the end of the round
         /// </summary>
         EndRound,
+        
     }
 }

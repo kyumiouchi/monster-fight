@@ -17,24 +17,27 @@ namespace Game.Manager
         private float _leftEndWorldPosition;
         
         public Action OnEndRound = delegate {};
+        public Action OnPreparedRound = delegate {};
 
         #region Callback
 
         private void OnEnable()
         {
+            _playerGenerator.OnAllPlayerReady += PreparedRound;
             _playerGenerator.OnAllPlayerEnded += EndRound;
         }
 
         private void OnDisable()
         {
+            _playerGenerator.OnAllPlayerReady -= PreparedRound;
             _playerGenerator.OnAllPlayerEnded -= EndRound;
         }
 
         #endregion
         
-        public void PrepareRound()
+        public void InitializeRound()
         {
-            _playerGenerator.PreparePlayers(_roundsSo.NumberPlayers, _leftEndWorldPosition);
+            _playerGenerator.InitializePlayers(_leftEndWorldPosition);
         }
         
         public void StartRound()
@@ -48,9 +51,14 @@ namespace Game.Manager
             _leftEndWorldPosition = leftBottomWorldPosition.x;
         }
 
+        private void PreparedRound()
+        {
+            OnPreparedRound?.Invoke();
+        }
+
         private void EndRound()
         {
-            _roundsSo.SetCurrentRoundTimer(_roundUi.EndRound());
+            _roundsSo.SetLastRoundTimer(_roundUi.EndRound());
             OnEndRound?.Invoke();
         }
     }

@@ -12,23 +12,32 @@ namespace Game.Player
         private UnityAction<Player> OnUpdatePlayerInfo;
         private UnityAction OnWillRelease;
         private UnityAction OnReleased;
+        private UnityAction OnActivatedObjets;
+        private int _activatedObj = 0;
 
-        public PlayerPool(Func<Player> onCreateInstance, UnityAction<Player> onUpdatePlayerInfo, UnityAction onReleased, UnityAction onWillRelease)
+        public PlayerPool(Func<Player> onCreateInstance, UnityAction<Player> onUpdatePlayerInfo, UnityAction onReleased, 
+            UnityAction onWillRelease, UnityAction onActivatedObjets)
         {
             OnCreateInstance = onCreateInstance;
             OnUpdatePlayerInfo = onUpdatePlayerInfo;
             OnWillRelease = onWillRelease;
             OnReleased = onReleased;
+            OnActivatedObjets = onActivatedObjets;
+            
+            _activatedObj = 0;
             _pool = new CustomPool<Player>(this);
         }
         public void Get()
         {
             _pool.Get();
+            _activatedObj++;
+            OnActivatedObjets?.Invoke();
         }
 
         public void Release(Player objToReturn)
         {
             _pool.Return(objToReturn);
+            _activatedObj--;
             OnReleased?.Invoke();
         }
 
@@ -40,6 +49,11 @@ namespace Game.Player
         public void CanRelease()
         {
             OnWillRelease?.Invoke();
+        }
+
+        public int ActivatedObj()
+        {
+            return _activatedObj;
         }
         
         #region PoolSettings

@@ -13,33 +13,36 @@ namespace Game.Player
         [SerializeField] private Player _playerPrefab;
         [SerializeField] private Rect _rectAreaInstanciate;
         [SerializeField] private CharacterSo _characterSo;
+        [SerializeField] private RoundsSo _roundsSo;
         
         private PlayerPool _playerPool;
         
         private int _playerToPool = 0;
         private int _totalEnabledPlayers = 0;
         private int _lastTotalEnabledPlayers = 0;
-        private Coroutine _coroutine;
         private float _destroyPlayerPosition;
         private int _finishedPlayers = 0;
         private int _destroyedPlayers = 0;
         private float _widthPlayer = 0;
         private float _heightPlayer = 0;
         
+        private Coroutine _coroutine;
+        
+        public Action OnAllPlayerReady = delegate { };
         public Action OnAllPlayerEnded = delegate { };
 
         private void Start()
         {
             _widthPlayer = _playerPrefab.GetPlayerWidth();
             _heightPlayer = _playerPrefab.GetPlayerHeight();
-            _playerPool = new PlayerPool(CreateInstance, UpdatePlayerInfo, Released, WillRelease);
+            _playerPool = new PlayerPool(CreateInstance, UpdatePlayerInfo, Released, WillRelease, ActivatedObjets);
         }
 
-        public void PreparePlayers(int players, float destroyPlayerPosition)
+        public void InitializePlayers(float destroyPlayerPosition)
         {
+            _totalEnabledPlayers = _roundsSo.NumberPlayers;
             if (_lastTotalEnabledPlayers == 0)
-                _playerToPool = players;
-            _totalEnabledPlayers = players;
+                _playerToPool = _totalEnabledPlayers;
             _destroyPlayerPosition = destroyPlayerPosition - _widthPlayer;
         }
 
@@ -77,9 +80,19 @@ namespace Game.Player
             }
         }
 
+        private void ActivatedObjets()
+        {
+            int spawnedPlayers = _playerPool.ActivatedObj();
+            _roundsSo.SetSpawnedPlayers(spawnedPlayers);
+            if (spawnedPlayers == _totalEnabledPlayers)
+            {
+                OnAllPlayerReady?.Invoke();
+            }
+        }
+
         private Player CreateInstance()
         {
-            Player go = Instantiate(_playerPrefab, transform, true);
+            var go = Instantiate(_playerPrefab, transform, true);
             return go;
         }
 

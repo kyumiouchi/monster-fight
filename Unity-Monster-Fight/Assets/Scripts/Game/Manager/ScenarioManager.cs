@@ -22,7 +22,7 @@ namespace Game.Manager
 
         private void GameStateChanged(GameStates states)
         {
-            if (states == GameStates.PrepareGame)
+            if (states == GameStates.InitializeRound)
                 _backgroundRenderer.sprite = _backgroundSo[_roundsSo.CurrentRound % _backgroundSo.Count];
         }
     }
