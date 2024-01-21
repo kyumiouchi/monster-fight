@@ -11,7 +11,6 @@ namespace Game.Manager
         {
             _instance = this;
         }
-
         
         [SerializeField] private PrepareGameManager _prepareGameManager = null;
         /// <summary>

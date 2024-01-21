@@ -9,7 +9,6 @@ namespace Game.Ui
 {
     public class InitializeRoundUi : MonoBehaviour
     {
-        [SerializeField] private Image _loadingBackground;
         [SerializeField] private Slider _loadingSlider;
         [SerializeField] private TextMeshProUGUI _textRound;
         [SerializeField] private TextMeshProUGUI _textTimer;
@@ -22,7 +21,7 @@ namespace Game.Ui
 
         private void Start()
         {
-            gameObject.SetActive(false);
+            if (!_canStartTimer) gameObject.SetActive(false);
         }
 
         public void StartLoading(int round, int totalPlayers)

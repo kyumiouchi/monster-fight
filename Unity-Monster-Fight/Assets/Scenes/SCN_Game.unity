@@ -1258,6 +1258,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Total time 00:00
 
+    Total time 00:00
+
     Total Monsters 0000'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d645b84e308feac4aa61c59d3a195531, type: 2}
@@ -1285,14 +1287,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 132.2
+  m_fontSize: 110.8
   m_fontSizeBase: 171.6
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 888
+  m_fontSizeMax: 150
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -3116,7 +3118,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c238174925278e48bb1457550ba4a6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadingBackground: {fileID: 986359956}
   _loadingSlider: {fileID: 2039056534}
   _textRound: {fileID: 1386264541}
   _textTimer: {fileID: 1302246596}

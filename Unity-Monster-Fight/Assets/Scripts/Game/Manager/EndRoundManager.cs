@@ -1,4 +1,5 @@
 using System;
+using Game.Ui;
 using Game.Utils;
 using UnityEngine;
 
@@ -29,7 +30,8 @@ namespace Game.Manager
 
         public void EndRound()
         {
-            _endRoundUi.StartEndRound(_roundsSo.CurrentRound, _roundsSo.NumberPlayers, 0);
+            _endRoundUi.StartEndRound(_roundsSo.CurrentRound, _roundsSo.NumberPlayers, 
+                _roundsSo.LastRoundData.RoundTimer, _roundsSo.LastRoundData.LoadingTimer);
         }
 
         private void StartNextRound()

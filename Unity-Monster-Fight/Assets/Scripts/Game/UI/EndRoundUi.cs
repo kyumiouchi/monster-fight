@@ -2,41 +2,46 @@ using System;
 using Game.Utils;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class EndRoundUi : MonoBehaviour
+namespace Game.Ui
 {
-    [SerializeField] private TextMeshProUGUI _textRound;
-    [SerializeField] private TextMeshProUGUI _textInfoRound;
-    [SerializeField] private Button _buttonNextRound;
-    [SerializeField] private Button _buttonExit;
-
-    public Action OnNextRound = delegate { };
-    public Action OnExitGame = delegate { };
-    private void Start()
+    public class EndRoundUi : MonoBehaviour
     {
-        gameObject.SetActive(false);
-        _buttonNextRound.onClick.AddListener(NextRound);
-        _buttonExit.onClick.AddListener(ExitGame);
-    }
+        [SerializeField] private TextMeshProUGUI _textRound;
+        [SerializeField] private TextMeshProUGUI _textInfoRound;
+        [SerializeField] private Button _buttonNextRound;
+        [SerializeField] private Button _buttonExit;
 
-    public void StartEndRound(int round, int totalPlayers, float timer)
-    {
-        _textRound.text = $"Round {round}";
-        _textInfoRound.text = $"Total time {StringFormat.TimerToString(timer)} \nTotal Monster {totalPlayers}";
+        public Action OnNextRound = delegate { };
+        public Action OnExitGame = delegate { };
 
-        gameObject.SetActive(true);        
-    }
+        private void Start()
+        {
+            gameObject.SetActive(false);
+            _buttonNextRound.onClick.AddListener(NextRound);
+            _buttonExit.onClick.AddListener(ExitGame);
+        }
 
-    private void NextRound()
-    {
-        gameObject.SetActive(false);
-        OnNextRound?.Invoke();
-    }
+        public void StartEndRound(int round, int totalPlayers, float roundtimer, float loadingTimer)
+        {
+            _textRound.text = $"Round {round}";
+            _textInfoRound.text = $"Round time {StringFormat.TimerToString(roundtimer)}" +
+                                  $"\nLoading time {StringFormat.TimerToString(loadingTimer)}" +
+                                  $"\nTotal Monster {totalPlayers}";
 
-    private void ExitGame()
-    {
-        OnExitGame?.Invoke();
+            gameObject.SetActive(true);
+        }
+
+        private void NextRound()
+        {
+            gameObject.SetActive(false);
+            OnNextRound?.Invoke();
+        }
+
+        private void ExitGame()
+        {
+            OnExitGame?.Invoke();
+        }
     }
 }

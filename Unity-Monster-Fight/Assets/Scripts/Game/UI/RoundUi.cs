@@ -1,4 +1,3 @@
-using System;
 using Game.Utils;
 using TMPro;
 using UnityEngine;
@@ -11,8 +10,7 @@ namespace Game.Ui
         [SerializeField] private TextMeshProUGUI _textTimer;
         [SerializeField] private TextMeshProUGUI _textMonsters;
         
-        private float _currentTimer;
-        
+        private float _currentTimer = 0;
         private bool _canStartTimer = false;
 
         private void Start()
@@ -43,11 +41,6 @@ namespace Game.Ui
             _textRound.enabled = false;
             _textTimer.enabled = false;
             _currentTimer = 0;
-        }
-
-        public void EndUi()
-        {
-            _canStartTimer = false;
         }
 
         public float EndRound()
