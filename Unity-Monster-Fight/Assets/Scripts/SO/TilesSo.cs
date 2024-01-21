@@ -4,6 +4,7 @@ using UnityEngine;
 public class TilesSo : ScriptableObject
 {
     [Header("Tiles Data")] 
+    
     [SerializeField] private Sprite[] _sprites;
 
     public int Count => _sprites.Length;

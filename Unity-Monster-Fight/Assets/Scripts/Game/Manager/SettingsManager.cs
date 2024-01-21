@@ -1,4 +1,3 @@
-using MyNamespace;
 using UnityEngine;
 
 namespace Game.Manager

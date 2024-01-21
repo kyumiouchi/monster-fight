@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
-using System.Numerics;
 using Game.Manager;
-using MyNamespace;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using Vector2 = UnityEngine.Vector2;
