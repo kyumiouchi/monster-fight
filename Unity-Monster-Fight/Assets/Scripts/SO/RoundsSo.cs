@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(menuName = "ScriptableObject/Data/Rounds Data", fileName = "Rounds_SO")]
 public class RoundsSo : ScriptableObject
@@ -7,25 +8,38 @@ public class RoundsSo : ScriptableObject
     [Header("Round Data")] 
     
     [SerializeField] private int _currentRound = 1;
+
+    [SerializeField] private float _currentRoundTimer = 0;
     public int CurrentRound => _currentRound;
+    public float CurrentRoundTimer => _currentRoundTimer;
 
     public int NumberPlayers => GetNumberOfPlayer(_currentRound);
 
+    public void RestartRound()
+    {
+        _currentRound = 1;
+        _currentRoundTimer = 0;
+    }
+    
     public void NextRound()
     {
         _currentRound++;
     }
-
+    
+    public void SetCurrentRoundTimer(float timer)
+    {
+        _currentRoundTimer = timer;
+    }
+    
+    #region Fibonacci
     private List<int> _memorizeSequence = null;
-
+    
     private int GetNumberOfPlayer(int round)
     {
         _memorizeSequence ??= new List<int>();
 
         return CalculationFibonacci(round);
     }
-
-    #region Fibonacci
     private int CalculationFibonacci(int value)
     {
         if (value <= 0)
@@ -70,4 +84,5 @@ public class RoundsSo : ScriptableObject
         return result;
     }
     #endregion
+
 }

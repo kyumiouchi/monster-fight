@@ -5,42 +5,22 @@ using UnityEngine;
 
 namespace Game
 {
-    public class GameManager : MonoBehaviourSingletonPersistence<GameManager>
+    public class GameManager : MonoBehaviour
     {
-        [Serializable]
-        public enum GameStates
+        private static GameManager _instance;
+
+        private void Awake()
         {
-            /// <summary>
-            /// Initial setup.
-            /// </summary>
-            Init,
-
-            /// <summary>
-            /// Player is in the main menu.
-            /// </summary>
-            PrepareGame,
-
-            /// <summary>
-            /// Player is in the difficulty menu.
-            /// </summary>
-            StartRound,
-
-            /// <summary>
-            /// Player is playing the game.
-            /// </summary>
-            EndRound,
-
-            /// <summary>
-            /// Player is playing the game.
-            /// </summary>
-            Restart,
+            _instance = this;
         }
 
+        
         [SerializeField] private PrepareGameManager _prepareGameManager = null;
         /// <summary>
         /// MainMenu component on the main menu GameObject.
         /// </summary>
         [SerializeField] private RoundManager _roundManager = null;
+        [SerializeField] private EndRoundManager _endRoundManager = null;
 
 
         /// <summary>
@@ -55,13 +35,12 @@ namespace Game
             State = GameStates.PrepareGame;
             _prepareGameManager.OnStartRound += StartRound;
             _roundManager.OnEndRound += OnRoundComplete;
+            _endRoundManager.OnNextRound += NextRound;
         }
         
         private GameStates State
         {
-
             get => _state;
-
             set
             {
                 // Cannot return to init.
@@ -72,7 +51,6 @@ namespace Game
 
                 _state = value;
                 
-
                 switch (_state)
                 {
                     case GameStates.PrepareGame:
@@ -85,9 +63,7 @@ namespace Game
                         break;
 
                     case GameStates.EndRound:
-                        break;
-
-                    case GameStates.Restart:
+                        _endRoundManager.EndRound();
                         break;
 
                     case GameStates.Init:
@@ -100,15 +76,22 @@ namespace Game
             }
         }
 
-        public void StartRound()
+        /// <summary>
+        /// Triggered when the round start.
+        /// </summary>
+        private void StartRound()
         {
             State = GameStates.StartRound;
         }
 
         /// <summary>
-        /// Triggered when the player completes a game.
+        /// Triggered when the player completes a round.
         /// </summary>
         private void OnRoundComplete()
+        {
+            State = GameStates.EndRound;
+        }
+        private void NextRound()
         {
             State = GameStates.PrepareGame;
         }

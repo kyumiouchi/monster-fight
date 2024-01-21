@@ -1,4 +1,5 @@
 using Game.Generic;
+using Game.Manager;
 using UnityEngine;
 
 namespace Game.Player
@@ -27,9 +28,9 @@ namespace Game.Player
         }
         #endregion
 
-        private void GameStateChanged(GameManager.GameStates gameStates)
+        private void GameStateChanged(GameStates gameStates)
         {
-            if (gameStates == GameManager.GameStates.StartRound)
+            if (gameStates == GameStates.StartRound)
             {
                 _playerMovement.StartRun();
             }

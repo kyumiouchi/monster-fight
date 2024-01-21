@@ -1,6 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using Game.Manager;
 using UnityEngine;
 
 namespace Game.Scenario
@@ -23,9 +21,9 @@ namespace Game.Scenario
         }
         #endregion
 
-        private void GameStateChanged(GameManager.GameStates states)
+        private void GameStateChanged(GameStates states)
         {
-            if (states == GameManager.GameStates.PrepareGame)
+            if (states == GameStates.PrepareGame)
                 _backgroundRenderer.sprite = _backgroundSo[_roundsSo.CurrentRound % _backgroundSo.Count];
         }
     }

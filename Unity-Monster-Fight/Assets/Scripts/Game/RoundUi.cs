@@ -1,4 +1,5 @@
 using System;
+using Game.Utils;
 using TMPro;
 using UnityEngine;
 
@@ -23,12 +24,12 @@ namespace Game.Ui
         {
             if(!_canStartTimer) return;
             _currentTimer += Time.deltaTime;
-            _textTimer.text = $"Timer {TimeSpan.FromSeconds(_currentTimer):ss\\.ff}";
+            _textTimer.text = $"Timer {StringFormat.TimerToString(_currentTimer)}";
         }
         
-        public void StartUi(int totalMosnters, int currentRound)
+        public void StartUi(int totalMonsters, int currentRound)
         {
-            _textMonsters.text = $"Total {totalMosnters}";
+            _textMonsters.text = $"Total {totalMonsters}";
             _textRound.text = $"Round {currentRound}";
             _textRound.enabled = true;
             _textTimer.enabled = true;
@@ -49,9 +50,12 @@ namespace Game.Ui
             _canStartTimer = false;
         }
 
-        public void EndRound()
+        public float EndRound()
         {
+            _canStartTimer = false;
+            float timerRound = _currentTimer;
             Clear();
+            return timerRound; 
         }
     }
 }

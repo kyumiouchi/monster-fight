@@ -27,7 +27,6 @@ namespace Game.Player
         private float _heightPlayer = 0;
         
         public Action OnAllPlayerEnded = delegate { };
-        public Action OnOnePlayerEnded = delegate { };
 
         private void Start()
         {
@@ -59,7 +58,6 @@ namespace Game.Player
             {
                 _lastTotalEnabledPlayers = _totalEnabledPlayers;
                 _totalEnabledPlayers = 0;
-                OnOnePlayerEnded?.Invoke();
             }
             if (_finishedPlayers == _lastTotalEnabledPlayers)
             {

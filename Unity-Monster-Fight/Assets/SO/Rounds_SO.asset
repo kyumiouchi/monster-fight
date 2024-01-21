@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Rounds_SO
   m_EditorClassIdentifier: 
   _currentRound: 1
+  _currentRoundTimer: 0
