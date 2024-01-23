@@ -43,12 +43,11 @@ namespace Game.Player
         public void InitializePlayers(float destroyPlayerPosition)
         {
             _totalEnabledPlayers = _roundsSo.NumberPlayers;
+            _destroyPlayerPosition = destroyPlayerPosition - _widthPlayer;
             if (_lastTotalEnabledPlayers == 0)
             {
                 StartSpawnPlayers();
             }
-                
-            _destroyPlayerPosition = destroyPlayerPosition - _widthPlayer;
         }
 
         private void Update()
