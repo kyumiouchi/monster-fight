@@ -20,13 +20,29 @@ namespace Game.Manager
 
         public static event Action<GameStates> OnGameStateChanged;
         
-        private void Start()
+        #region Callback
+
+        private void OnEnable()
         {
-            State = GameStates.InitializeRound;
             _initializeRoundManager.OnChargedRound += OnChargedRound;
             _prepareRoundManager.OnStartRound += OnStartRound;
             _roundManager.OnEndRound += OnRoundComplete;
             _endRoundManager.OnNextRound += OnNextRound;
+        }
+
+        private void OnDisable()
+        {
+            _initializeRoundManager.OnChargedRound -= OnChargedRound;
+            _prepareRoundManager.OnStartRound -= OnStartRound;
+            _roundManager.OnEndRound -= OnRoundComplete;
+            _endRoundManager.OnNextRound -= OnNextRound;
+        }
+
+        #endregion
+        
+        private void Start()
+        {
+            State = GameStates.InitializeRound;
         }
         
         private GameStates State

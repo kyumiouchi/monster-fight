@@ -157,8 +157,8 @@ namespace Game.Player
             {
                 _playerPool.Get();
                 _playerToPool--;
-                yield return null;
             }
+            yield return null;
         }
 
         #endregion

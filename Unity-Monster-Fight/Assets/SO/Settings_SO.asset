@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8e23ca51cb4b6049b9db0dd44124b76, type: 3}
   m_Name: Settings_SO
   m_EditorClassIdentifier: 
-  _typeInstanciate: 0
+  _typeInstanciate: 1
